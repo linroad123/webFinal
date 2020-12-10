@@ -2,27 +2,32 @@
       <h1 align="center">Summary</h1>
       <p>Logged in as <%= email %></p>
     <div align="center">
-        <form>
-            <input type="week" name="week" value="" onchange="getSummary()"/>
-            <input type="month" name="month" value="" onchange="myFunction()"/>
+        <form method="POST">
+            <label>You wanna see which week?</label>
+            <input type="week" name="week" value="" /><br><br>
+            <label>You wanna see which month?</label>
+            <input type="month" name="month" value="" />
+            <input type="submit" value="Submit!" />
         </form>
 
-        <h2>Weekly average</h2>
+        <h2>Weekly average </h2>
+        <h3>(by default from last week)</h3>
         <ul>
-            <li>Average sleep duration:</li>
-            <li>Average time spent on sports and exercise:</li>
-            <li>Average time spent studying:</li>
-            <li>Average sleep quality:</li>
-            <li>Average generic mood:</li>
+            <li>Average sleep duration:</li><%= weekavrduration %>
+            <li>Average time spent on sports and exercise:</li><%= weekavrsports %>
+            <li>Average time spent studying:</li><%= weekavrstudy %>
+            <li>Average sleep quality:</li><%= weekavrquality %>
+            <li>Average generic mood:</li><%= weekavrmood %>
         </ul>
 
-        <h2>Monthly average</h2>
+        <h2>Monthly average </h2>
+        <h3>(by default from last month)</h3>
         <ul>
-            <li>Average sleep duration:</li>
-            <li>Average time spent on sports and exercise:</li>
-            <li>Average time spent studying:</li>
-            <li>Average sleep quality:</li>
-            <li>Average generic mood:</li>
+            <li>Average sleep duration:</li><%= monthavrduration %>
+            <li>Average time spent on sports and exercise:</li><%= monthavrsports %>
+            <li>Average time spent studying:</li><%= monthavrstudy %>
+            <li>Average sleep quality:</li><%= monthavrquality %>
+            <li>Average generic mood:</li><%= monthavrmood %>
         </ul>
 
     </div>

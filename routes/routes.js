@@ -3,6 +3,7 @@ import * as userController from "./controllers/userController.js";
 import * as reportController from "./controllers/reportController.js";
 import * as userApi from "./apis/userApi.js";
 import * as reportApi from "./apis/reportApi.js";
+import * as reportService from "../services/reportService.js"
 
 const router = new Router();
 
@@ -26,6 +27,7 @@ router.get('/behavior/summary',reportController.defaultSummary);
 
 
 router.get('/api/summary',reportController.avgSummary);
+router.get('/api/summary/:year/:month/:day',reportApi.avrspecific);
 
 
 

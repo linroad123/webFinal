@@ -15,7 +15,16 @@ const chooseTime = async({render,session}) => {
   };
   
   const defaultSummary = async({render,request,session}) => {
-    render('summary.ejs',{week:"",month:"",email: await session.get('user')});
+    const id = await session.get('id');
+    const data_week = await reportService.userDefaultAvgWeek(id);
+    const data_month = await reportService.userDefaultAvgMonth(id);
+    var obj = Object.assign(data_week,data_month);
+    obj.week ="";
+    obj.email="";
+    obj.email=await session.get('user');
+
+    render('summary.ejs',obj);
+
   }
   
   const getSummary = async({render,request,session}) => {
@@ -28,12 +37,12 @@ const chooseTime = async({render,session}) => {
     render('summary.ejs',{data: await reportService.getSummary(week,month),email: await session.get('user')});
   }
 
-  const avgSummary = async({render}) => {
-    render('evening.ejs');
+  const avgSummary = async({response}) => {
+    response.body = await reportService.avrsummary();
   };
 
   const landing = async({render}) => {
     render('landing.ejs',{today_mood :await reportService.landing_today(),yesterday_mood:await reportService.landing_yesterday()});
   }
 
-export { chooseTime,morning,evening,defaultSummary,getSummary,avgSummary,landing };
+export { chooseTime,morning,evening,defaultSummary,getSummary,landing,avgSummary };

@@ -76,4 +76,26 @@ const addMorning = async({request,response,session,render}) => {
     }
 }
 
-export {addMorning,addEvening};
+const avrspecific =async({params,response}) => {
+    const year = params.year;
+    const month = params.month;
+    const day = params.day;
+
+    const res = await reportService.avrspecific(year,month,day);
+    response.body =res;
+}
+
+const weekreport = async({request,response,session,render}) => {
+    const body = request.body();
+    const params = await body.value;
+
+    const week = params.get('week');
+    const month = params.get('month');
+
+    console.log(week);
+    console.log(month);
+
+
+}
+
+export {addMorning,addEvening,avrspecific,weekreport};
