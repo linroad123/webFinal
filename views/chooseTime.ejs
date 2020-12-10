@@ -1,0 +1,17 @@
+<%- include('./partials/header.ejs') %>
+      <h1 align="center">Choose the reporting period</h1>
+      <p>Logged in as <%= email %></p>
+      <div align="center">
+    <form method="GET" action="/morning">
+        <p>Hi:<%= message %></p>        
+        <input type='submit' name="morning" value='Morning'/>
+    </form>
+    <br><br>
+    <form method="GET" action="/evening">
+        <p>Hi:<%= evemessage %></p> 
+        <input type='submit' name="evening" value='Evening'/>
+    </form>
+    </div>
+    <input type="button" onclick="location.href='/auth/logout';" value="Logout!" />
+<%- include('./partials/footer.ejs') %>
+

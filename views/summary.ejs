@@ -1,0 +1,32 @@
+<%- include('./partials/header.ejs') %>
+      <h1 align="center">Summary</h1>
+      <p>Logged in as <%= email %></p>
+    <div align="center">
+        <form>
+            <input type="week" name="week" value="" onchange="getSummary()"/>
+            <input type="month" name="month" value="" onchange="myFunction()"/>
+        </form>
+
+        <h2>Weekly average</h2>
+        <ul>
+            <li>Average sleep duration:</li>
+            <li>Average time spent on sports and exercise:</li>
+            <li>Average time spent studying:</li>
+            <li>Average sleep quality:</li>
+            <li>Average generic mood:</li>
+        </ul>
+
+        <h2>Monthly average</h2>
+        <ul>
+            <li>Average sleep duration:</li>
+            <li>Average time spent on sports and exercise:</li>
+            <li>Average time spent studying:</li>
+            <li>Average sleep quality:</li>
+            <li>Average generic mood:</li>
+        </ul>
+
+    </div>
+    <input type="button" onclick="location.href='/auth/logout';" value="Logout!" />
+
+
+<%- include('./partials/footer.ejs') %>

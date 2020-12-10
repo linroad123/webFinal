@@ -1,0 +1,14 @@
+<h1 align="center">Register!</h1>
+<div align="center">
+<form method="POST">
+    <label>Email:</label>
+    <%- include('./partials/error.ejs', { errors: errors, attribute: 'email'}) %>
+    <input type="email" name="email" value="<%- email %>"/><br><br>
+    <label>Password:</label>
+    <%- include('./partials/error.ejs', { errors: errors, attribute: 'password'}) %>
+    <input type="password" name="password" /><br><br>
+    <label>Verification:</label>
+    <input type="password" name="verification" /><br><br>
+    <input type="submit" value="Submit!" />
+</form>
+</div>

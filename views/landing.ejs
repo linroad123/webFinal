@@ -1,0 +1,54 @@
+<%- include('./partials/header.ejs') %>
+      <h1 align="center">Self-Monitoring Application</h1>
+    <div align="center">
+        <h2>The application provides users an opportunity to report behavior daily.</h2>
+        <p>The application keeps track of your behaviors includes: </p>
+        <ul>
+            <li>Sleep duration and sleep quality</li>
+            <li>Time spent on sports and exercise</li>
+            <li>Time spent studying</li>
+            <li>Regularity and quality of eating</li>
+            <li>Generic mood</li>
+        </ul>
+
+        <p>You need to be logged in to get the reporting services. 
+            The application provides two options for reporting: morning and evening.</p>
+
+        <p>When choosing morning, the application asks for the sleep duration and sleep quality, 
+            as well as generic mood. 
+            Sleep duration is given as a decimal indicating hours slept, 
+            and sleep quality and generic mood are given using a scale from 1 to 5, 
+            where 1 indicates very poor and 5 indicates excellent.</p>
+
+        <p>When choosing evening, the application asks for time spent on sports and exercise, 
+            time spent studying, regularity and quality of eating, and generic mood.
+            Time spent on sports and exercise, 
+            and time spent studying are given as a decimal number indicating the number of hours.
+            Regularity and quality of eating as well as the generic mood are given using a scale from 1 to 5,
+            where 1 indicates very poor and 5 indicates excellent.</p>
+
+        <p>In both options, by default, 
+           the application assumes that the reporting is done for the current day 
+           (or, in the case of the morning, for the previous night). 
+           Both reporting options also provide an input field through which a different day can be chosen
+            -- this way, if a you skips reporting, the data can be filled in at a later point.</p>
+    </div>
+
+    <a href="auth/registration">Reister</a>
+    <a href="auth/login">login</a>
+    <a href="behavior/reporting">Report</a>
+
+    <h2>Average mood of all user today: <%= today_mood %></h2>
+        
+    <h2>Average mood of all user yesterday: <%= yesterday_mood %></h2>
+
+    <% if (today_mood > yesterday_mood) { %>
+        <h2>Trend:things are looking bright today</h2>
+    <%} else if (today_mood < yesterday_mood) { %>
+        <h2>Trend:things are looking gloomy today</h2>
+    <%} else {%>
+        <h2>Trend:things are the same as yesterday</h2>
+    <%};%>
+
+
+<%- include('./partials/footer.ejs') %>

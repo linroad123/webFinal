@@ -1,0 +1,33 @@
+<%- include('./partials/header.ejs') %>
+    <h1 align="center">Evening Report</h1>
+    <p>Logged in as <%= email %></p>
+    <form method="POST">
+        <div align="center">
+            <label>Date</label>
+        <input type="date" name="date" value="date" />
+        <br><br>
+            <label>time spent on sports and exercise</label>
+            <%- include('./partials/error.ejs', { errors: errors, attribute: 'sports'}) %>
+        <input type="number" name="sports" max="24" min="0" step="0.1" required/>
+        <p>0~24h</p>
+        <br><br>
+            <label>time spent studying</label>
+            <%- include('./partials/error.ejs', { errors: errors, attribute: 'studying'}) %>
+        <input type="number" name="studying" max="24" min="0" step="0.1" required/>
+        <p>0~24h</p>
+        <br><br>
+            <label>Generic mood</label>
+            <%- include('./partials/error.ejs', { errors: errors, attribute: 'mood'}) %>
+        <input type="range" name="mood" min="1" max="5" required/>
+        <p>1 corresponds to very poor and 5 corresponds to excellent</p>
+        <br><br>
+            <label>regularity and quality of eating</label>
+            <%- include('./partials/error.ejs', { errors: errors, attribute: 'eating'}) %>
+        <input type="range" name="eating" min="1" max="5"/>
+        <p>1 corresponds to very poor and 5 corresponds to excellent</p>
+        <br><br>
+        <input type="submit" value="Submit!" /><br><br>
+        </div>
+    </form>
+    <input type="button" onclick="location.href='/auth/logout';" value="Logout!" />
+<%- include('./partials/footer.ejs') %>
