@@ -19,4 +19,16 @@ const executeQuery = async(query, ...params) => {
   return null;
 };
 
-export { executeQuery };
+const executeCachedQuery = async(query, ...params) => {
+  const key = query + params.reduce((acc, o) => acc + "-" + o, "");
+  if (cache[key]) {
+      return cache[key];
+  }
+
+  const res = await executeQuery(query, ...params);
+  cache[key] = res;
+
+  return res;
+}
+
+export { executeQuery,executeCachedQuery };

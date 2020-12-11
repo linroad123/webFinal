@@ -58,24 +58,21 @@ const authenticate = async({request, response, session,render}) => {
     };
 
     const [passes, errors] = await validate(data, validationRules);
+    const existingUsers = await userService.setRegister(email);
+    
 
     if (!passes) {
         data.errors = errors;
         render("login.ejs", data);
-    } else {  
-        // check if the email exists in the database
-        const existingUsers = await userService.setRegister(email);
-        if (existingUsers.rowCount === 0) {
-            response.status = 401;
-            return;
-        }
-    
-        // take the first row from the results
+    } else if (existingUsers.rowCount === 0){  
+        // check if the email exists in the database  
+        data.errors = {email:{wrong:"User doesn't exist, please register!"}};
+         render("login.ejs", data);
+    } else {
         const userObj = existingUsers.rowsOfObjects()[0];
-    
         const hash = userObj.password;
-    
         const passwordCorrect = await bcrypt.compare(password, hash);
+
         if (!passwordCorrect) {
             data.errors = {password:{wrong:"Invalid password"}}
             render("login.ejs", data);

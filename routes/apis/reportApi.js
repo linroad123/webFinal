@@ -85,17 +85,30 @@ const avrspecific =async({params,response}) => {
     response.body =res;
 }
 
-const weekreport = async({request,response,session,render}) => {
+const selectreport = async({request,response,session,render}) => {
     const body = request.body();
     const params = await body.value;
 
     const week = params.get('week');
     const month = params.get('month');
 
-    console.log(week);
-    console.log(month);
+    
+    const weeks = week.split('W')[1];
+    const months = month.split('-')[1];
+    console.log(months)
 
+    const id = await session.get('id');
 
+    const obj_w = await reportService.userChooseAvgWeek(weeks,id);
+    const obj_m = await reportService.userChooseAvgMonth(months,id);
+
+    var obj = Object.assign(obj_w,obj_m);
+    obj.week ="";
+    obj.weeks = weeks;
+    obj.months = months;
+    obj.email=await session.get('user');
+    render('chooseSummary.ejs',obj);
+    
 }
 
-export {addMorning,addEvening,avrspecific,weekreport};
+export {addMorning,addEvening,avrspecific,selectreport};

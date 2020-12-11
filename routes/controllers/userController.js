@@ -1,7 +1,7 @@
 import * as userService from "../../services/userService.js";
 
 
-const showForm = async({render}) => {
+const showForm = async({render,response}) => {
   render('register.ejs',{errors:{},email:null});
 };
 

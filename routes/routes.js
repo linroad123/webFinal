@@ -24,6 +24,7 @@ router.post('/morning',reportApi.addMorning);
 router.post('/evening',reportApi.addEvening);
 
 router.get('/behavior/summary',reportController.defaultSummary);
+router.post('/behavior/summary',reportApi.selectreport);
 
 
 router.get('/api/summary',reportController.avgSummary);

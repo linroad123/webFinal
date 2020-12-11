@@ -1,0 +1,95 @@
+.button {
+    background-color: #13c2c2;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 18px;
+    padding-bottom: 12px;
+    margin-top: 40px;
+    display: inline-block;
+    line-height: 1;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    outline: 0px;
+    border-color: unset;
+}
+
+body {
+    background-image: url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg);
+    background-repeat: no-repeat;
+    background-position: center 110px;
+    background-size: 100%;
+}
+
+.form-element {
+    width: 300px;
+}
+
+.mar {
+    margin-top: 40px;
+}
+
+.report-content {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+}
+
+.report-content-left a{
+    margin-right: 10px;
+}
+
+ul li{
+    list-style-type:none;
+}
+
+.container {
+    padding-top: 50px;
+}
+
+.evening-part div {
+    width: 700px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.evening-part input {
+    width: 400px;
+}
+
+.regis-element {
+    width: 550px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.regis-element input {
+    width: 400px;
+}
+
+.regis-element label {
+    width: 100px;
+    text-align: right;
+    margin: 0;
+}
+
+.logout {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Summary-part {
+    display: flex;
+    width: 500px;
+    justify-content: space-between;
+}
+
+.Summary-part input {
+    width: 185px;
+}

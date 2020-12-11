@@ -1,0 +1,37 @@
+<%- include('./partials/header.ejs') %>
+      <h1 align="center">Summary</h1>
+      <p>Logged in as <%= email %></p>
+    <div align="center">
+        <form method="POST" >
+            <label>You wanna see which week?</label>
+            <input type="week" name="week"  /><br><br>
+            <label>You wanna see which month?</label>
+            <input type="month" name="month"  />
+            <input type="submit" value="Submit!" />
+        </form>
+
+        <h2>Weekly average </h2>
+        <h3>you choose <%= weeks %> week</h3>
+        <ul>
+            <li>Average sleep duration:<%= weekavrduration %></li>
+            <li>Average time spent on sports and exercise:<%= weekavrsports %></li>
+            <li>Average time spent studying:<%= weekavrstudy %></li>
+            <li>Average sleep quality:<%= weekavrquality %></li>
+            <li>Average generic mood:<%= weekavrmood %></li>
+        </ul>
+
+        <h2>Monthly average </h2>
+        <h3>you choose <%= months %> month</h3>
+        <ul>
+            <li>Average sleep duration:<%= monthavrduration %></li>
+            <li>Average time spent on sports and exercise:<%= monthavrsports %></li>
+            <li>Average time spent studying:<%= monthavrstudy %></li>
+            <li>Average sleep quality:<%= monthavrquality %></li>
+            <li>Average generic mood:<%= monthavrmood %></li>
+        </ul>
+
+    </div>
+    <input type="button" onclick="location.href='/auth/logout';" value="Logout!" />
+
+
+<%- include('./partials/footer.ejs') %>

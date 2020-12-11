@@ -49,34 +49,9 @@ const eveningDone = async(id) =>{
     
 }
 
-const defaultSummary = async(week,month) => {
-    const duration_week = await executeQuery("SELECT AVG(duration) FROM morning WHERE week($1)", week);
-    const duration_month = await executeQuery("SELECT AVG(duration) FROM morning WHERE month($1)", month);
-    return duration_month,duration_week;
-}
-
-const getSummarybyWeek = async(week,month) => {
-    const res = await executeQuery("SELECT \
-    avg(duration) as avg_sleep, \
-    avg(quality) as avg_quality,\
-    avg(sports) as avg_sport,\
-    avg(studying) as avg_studying,\
-    avg(morning.mood + evening.mood) as avg_mood \
-    FROM morning \
-    INNER JOIN \
-    evening \
-    ON morning.user_id = evening.user_id \
-    WHERE DATE_PART(‘week’,morning.date) = $1 \
-    GROUP BY morning.user_id ",week);
-    if (!res) {
-        return [];
-    }
-    return res.rowsOfObjects();
-
-}
 
 const landing_today = async() =>{
-    const today_mood = await executeQuery("select (morning.mood + evening.mood)/2 as today FROM morning INNER JOIN evening ON morning.user_id = evening.user_id WHERE morning.date= current_date and evening.date= current_date");
+    const today_mood = await executeQuery("select (AVG(morning. mood)+AVG(evening.mood))/2 as today FROM morning INNER JOIN evening ON morning.user_id = evening.user_id WHERE morning.date= current_date and evening.date= current_date");
 
     let res = [];
     if (today_mood) {
@@ -92,7 +67,7 @@ const landing_today = async() =>{
 }
 
 const landing_yesterday = async() =>{
-    const yesterday_mood = await executeQuery("select (morning.mood + evening.mood)/2 as yesterday FROM morning INNER JOIN evening ON morning.user_id = evening.user_id WHERE morning.date= current_date-1 and evening.date= current_date-1");
+    const yesterday_mood = await executeQuery("select (AVG(morning. mood)+AVG(evening.mood))/2 as yesterday FROM morning INNER JOIN evening ON morning.user_id = evening.user_id WHERE morning.date= current_date-1 and evening.date= current_date-1");
     let res = [];
     if (yesterday_mood) {
         res = yesterday_mood.rowsOfObjects();
@@ -157,8 +132,42 @@ const userDefaultAvgMonth = async(id) => {
     const obj = await executeQuery("SELECT (AVG(morning. mood)+AVG(evening.mood))/2 as monthavrmood, AVG(duration) as monthavrduration,AVG(sports) as monthavrsports,AVG(study) as monthavrstudy,AVG(quality) as monthavrquality FROM morning INNER JOIN evening ON morning.user_id = evening. user_id  and date_part('month',morning.date)=$1 and date_part('month',morning.date)=$2 and morning.user_id=$3", defaultmonth, defaultmonth,id);
 
     const res = obj.rowsOfObjects()[0];
+    console.log(res)
+        if(!res.monthavrmood) {
+            for (var key in res){
+                res[key] ="no data for last month exists"
+            }
+            return res;
+        }else{
+           return res; 
+        }
+    
+}
+
+const userChooseAvgWeek = async(week,id) => {
+
+    const obj = await executeQuery("SELECT (AVG(morning. mood)+AVG(evening.mood))/2 as weekavrmood, AVG(duration) as weekavrduration,AVG(sports) as weekavrsports,AVG(study) as weekavrstudy,AVG(quality) as weekavrquality FROM morning INNER JOIN evening ON morning.user_id = evening. user_id  and date_part('week',morning.date)=$1 and date_part('week',morning.date)=$2 and morning.user_id=$3", week, week,id);
+
+    const res = obj.rowsOfObjects()[0];
 
         if(!res.weekavrmood) {
+            for (var key in res){
+                res[key] ="no data for last week exists"
+            }
+            return res;
+        }else{
+           return res; 
+        }
+    
+}
+
+const userChooseAvgMonth = async(month,id) => {
+
+    const obj = await executeQuery("SELECT (AVG(morning. mood)+AVG(evening.mood))/2 as monthavrmood, AVG(duration) as monthavrduration,AVG(sports) as monthavrsports,AVG(study) as monthavrstudy,AVG(quality) as monthavrquality FROM morning INNER JOIN evening ON morning.user_id = evening. user_id  and date_part('month',morning.date)=$1 and date_part('month',morning.date)=$2 and morning.user_id=$3", month, month,id);
+
+    const res = obj.rowsOfObjects()[0];
+
+        if(!res.monthavrmood) {
             for (var key in res){
                 res[key] ="no data for last month exists"
             }
@@ -170,6 +179,6 @@ const userDefaultAvgMonth = async(id) => {
 }
 
 
-export { avrspecific,avrsummary,addMorning,addEvening,defaultSummary,
-    getSummarybyWeek,landing_today,landing_yesterday,
+export { avrspecific,avrsummary,addMorning,addEvening,
+    landing_today,landing_yesterday,userChooseAvgWeek,userChooseAvgMonth,
     morningDone,eveningDone,userDefaultAvgWeek,userDefaultAvgMonth};

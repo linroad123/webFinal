@@ -3,7 +3,7 @@ import {Pool} from "../deps.js";
 let config = {};
 
 if (Deno.env.get('TEST_ENVIRONMENT')) {
-  config.database = {};
+  config.database = Deno.env.get('TEST_ENVIRONMENT');
 } else {
   config.database = {
     hostname: "hattie.db.elephantsql.com",
